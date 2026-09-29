@@ -1,0 +1,15 @@
+/* Global styles loaded once in main.jsx. Component styles use CSS Modules instead. */
+@import './reset.css';
+@import './variables.css';
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+a {
+  color: var(--color-primary);
+}

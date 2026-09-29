@@ -1,0 +1,89 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.hero {
+  padding: var(--space-7) var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: var(--font-size-hero);
+  line-height: 1.2;
+}
+
+.heroText {
+  max-width: 640px;
+  margin: var(--space-4) auto 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+}
+
+.steps,
+.roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.stepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--color-info-bg);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.cardTitle {
+  font-size: var(--font-size-lg);
+}
+
+.cardText {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  flex-grow: 1;
+}
+
+.roleActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}

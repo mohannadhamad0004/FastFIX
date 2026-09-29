@@ -1,0 +1,45 @@
+/* Design tokens. Temporary values - not the final design. */
+:root {
+  --color-primary: #1f6feb;
+  --color-primary-hover: #1858c4;
+  --color-primary-contrast: #ffffff;
+
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-border: #dfe3e8;
+  --color-text: #1c2024;
+  --color-text-muted: #5f6b76;
+
+  --color-success: #1a7f37;
+  --color-success-bg: #dafbe1;
+  --color-warning: #9a6700;
+  --color-warning-bg: #fff4d4;
+  --color-danger: #cf222e;
+  --color-danger-bg: #ffebe9;
+  --color-info: #0969da;
+  --color-info-bg: #ddf4ff;
+  --color-neutral: #57606a;
+  --color-neutral-bg: #eaeef2;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+  --font-size-hero: 2.5rem;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --content-width: 1100px;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "fastfix",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "apps/api",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w @fastfix/api\" \"npm run dev -w @fastfix/web\"",
+    "dev:web": "npm run dev -w @fastfix/web",
+    "dev:api": "npm run dev -w @fastfix/api",
+    "build": "npm run build -w @fastfix/web"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

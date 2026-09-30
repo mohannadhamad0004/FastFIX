@@ -35,3 +35,17 @@
 .secondary:hover:not(:disabled) {
   background: var(--color-bg);
 }
+
+.danger {
+  background: var(--color-danger);
+  color: var(--color-primary-contrast);
+}
+
+.danger:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

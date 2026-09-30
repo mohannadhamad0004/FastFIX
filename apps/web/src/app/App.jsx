@@ -1,7 +1,12 @@
 import { RouterProvider } from 'react-router/dom'
+import AppProviders from './AppProviders.jsx'
 import { router } from './routes.jsx'
 
-// Root component. TODO: wrap in AppProviders once auth and data providers exist.
+// Root component.
 export default function App() {
-  return <RouterProvider router={router} />
+  return (
+    <AppProviders>
+      <RouterProvider router={router} />
+    </AppProviders>
+  )
 }

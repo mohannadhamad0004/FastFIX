@@ -1,3 +1,4 @@
+import { ROLES } from '../authorization/roles.js'
 import Button from '../components/Button.jsx'
 import styles from './Home.module.css'
 
@@ -16,28 +17,26 @@ const steps = [
   },
 ]
 
-// TODO: point these at /login and /signup?role=... once the auth pages exist.
-// For now each role goes straight to its dashboard so the shells can be browsed.
 const roles = [
   {
+    role: ROLES.CUSTOMER,
     name: 'Customer',
     text: 'Register your cars, report problems, and track repairs and maintenance history.',
-    to: '/customer',
   },
   {
+    role: ROLES.MECHANIC,
     name: 'Mechanic',
     text: 'Receive service requests with an AI pre-report and confirm the diagnosis.',
-    to: '/mechanic',
   },
   {
-    name: 'Shop owner',
-    text: 'Sell parts, accessories, motors and headlights to customers and mechanics.',
-    to: '/shop',
+    role: ROLES.PARTS_SHOP,
+    name: 'Parts Shop',
+    text: 'List your shop on FastFix and sell parts, accessories, motors and headlights to customers and mechanics.',
   },
   {
+    role: ROLES.TOW,
     name: 'Tow company',
     text: 'Accept tow requests for your trucks and take cars to a mechanic or parts shop.',
-    to: '/tow',
   },
 ]
 
@@ -51,7 +50,13 @@ export default function Home() {
           sound of the problem and get an AI preliminary diagnosis before a mechanic takes a look.
         </p>
         <div className={styles.heroActions}>
-          <Button to="/customer">Report a car problem</Button>
+          <Button to="/mechanics">Find a mechanic</Button>
+          <Button to="/tow-companies" variant="secondary">
+            Call a tow truck
+          </Button>
+          <Button to="/marketplace" variant="secondary">
+            Search parts
+          </Button>
         </div>
       </section>
 
@@ -76,8 +81,8 @@ export default function Home() {
               <h3 className={styles.cardTitle}>{role.name}</h3>
               <p className={styles.cardText}>{role.text}</p>
               <div className={styles.roleActions}>
-                <Button to={role.to}>Sign up</Button>
-                <Button to={role.to} variant="secondary">
+                <Button to={`/signup?role=${role.role}`}>Sign up</Button>
+                <Button to="/login" variant="secondary">
                   Log in
                 </Button>
               </div>

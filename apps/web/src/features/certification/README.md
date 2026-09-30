@@ -1,6 +1,6 @@
 # certification
 
-Mechanics, shop owners and tow companies upload certificates, licenses or truck details and follow their verification status.
+Mechanics, parts shops and tow companies upload certificates, licenses or truck details and follow their verification status.
 
 | Path | Purpose |
 | --- | --- |

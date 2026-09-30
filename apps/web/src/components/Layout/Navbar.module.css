@@ -45,3 +45,43 @@
   color: var(--color-primary);
   background: var(--color-info-bg);
 }
+
+.left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Phone: brand and account on the first row, the public links on a second row. */
+@media (max-width: 640px) {
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2);
+  }
+
+  .left {
+    display: contents;
+  }
+
+  .brand {
+    grid-row: 1;
+  }
+
+  .account {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .links {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+}

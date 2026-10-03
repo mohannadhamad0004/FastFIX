@@ -16,8 +16,13 @@ is not included in production builds. The mock state is kept in sessionStorage
 | File | Purpose |
 | --- | --- |
 | `authService.js` | Every auth call (register, login, logout, getCurrentUser, requestPasswordReset, resetPassword) and the public mechanic / tow company directory (`getDirectory`, `getDirectoryEntry` - approved, non-suspended accounts, approved skills and public fields only). Suspended accounts can't log in. Admin calls are in `features/admin/adminService.js`. Mock now - swap for real API calls |
-| `AuthContext.jsx` | `AuthProvider`: holds the mock accounts and the logged-in user |
-| `useAuth.js` | `useAuth()` -> `{ user, service }`, and `useAuthQuery()` for loading data |
+| `profileService.js` | The logged-in user's own account (`updateContact`, `changePassword`, `logoutAllDevices`, `updateNotificationPrefs`) and public profile (`updateProfile`, `submitBusinessLicense`, `withdrawChange`, `addSkill`, `updateSkill`, `removeSkill`). Changed business/workshop names and licenses wait in `account.pendingChanges`; new or re-certified skills become `pending`. Mock |
+| `profileRules.js` | Which profile fields each role edits, and their rules (shared by the service and the form) |
+| `reviewItems.js` | What of an approved account waits for an admin (`pendingReviewItems`), `changeOf`, `isApprovedTruck` |
+| `account/` | The forms on `/account` (`pages/AccountPage.jsx`): contact details, password, notifications, log out everywhere |
+| `profile/` | The sections of `/profile` (`pages/ProfilePage.jsx`): public details, services, skills, business license |
+| `AuthContext.jsx` | `AuthProvider`: holds the mock accounts and the logged-in user, and creates the auth and profile services |
+| `useAuth.js` | `useAuth()` -> `{ user, service }`, `useProfileService()`, and `useAuthQuery()` for loading data |
 | `mockUsers.js` | Seed accounts: admin, customer, mechanics, tow companies, parts shops (some still pending) |
 | `mockFiles.js` | Generated placeholder photos, logos and PDFs for the seed accounts |
 | `redirect.js` | `/login?redirect=...` helpers (only same-site paths are followed) |

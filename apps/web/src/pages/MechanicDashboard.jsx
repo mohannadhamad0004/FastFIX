@@ -1,4 +1,7 @@
+import ProviderRequests from '../features/requests/components/ProviderRequests.jsx'
+import ResponderEmergencies from '../features/requests/emergency/components/ResponderEmergencies.jsx'
 import Button from '../components/Button.jsx'
+import Card from '../components/Card.jsx'
 import StatusBadge from '../components/StatusBadge.jsx'
 import styles from './MechanicDashboard.module.css'
 
@@ -62,6 +65,9 @@ const urgencyTone = { High: 'danger', Medium: 'warning', Low: 'success' }
 export default function MechanicDashboard() {
   return (
     <div className={styles.page}>
+      <ResponderEmergencies />
+      <ProviderRequests />
+
       <header>
         <h1 className={styles.title}>Assigned requests</h1>
         <p className={styles.subtitle}>
@@ -71,7 +77,7 @@ export default function MechanicDashboard() {
 
       <ul className={styles.list}>
         {assignedRequests.map((request) => (
-          <li key={request.id} className={styles.card}>
+          <Card as="li" key={request.id} padding="lg" className={styles.card}>
             <div className={styles.cardHeader}>
               <div>
                 <h2 className={styles.carName}>{request.car}</h2>
@@ -109,7 +115,7 @@ export default function MechanicDashboard() {
               {/* TODO: send the mechanic's confirmation or correction to the API */}
               <Button disabled>Confirm diagnosis</Button>
             </div>
-          </li>
+          </Card>
         ))}
       </ul>
     </div>

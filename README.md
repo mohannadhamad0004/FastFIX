@@ -15,17 +15,26 @@ Each feature and module folder has its own README explaining its purpose. Conven
 
 ## Getting started
 
-Requirements: Node.js 22+ and PostgreSQL.
+Requirements: Node.js 22+. PostgreSQL is optional during development.
 
 ```sh
 npm install
-npm install express cors helmet pg -w @fastfix/api
-npm install -D concurrently
-copy apps\api\.env.example apps\api\.env      # then edit apps/api/.env
 npm run dev                                    # api on :4000, web on :5173
 ```
 
-API keys (AI, maps) go in `apps/api/.env` only. The web and mobile apps call the api, never the AI provider directly.
+Without a `DATABASE_URL`, the api uses an in-memory PostgreSQL (PGlite) that is migrated and filled with the web app's mock data on every start, so the marketplace search works with nothing else installed. Data resets when the api restarts.
+
+To use a real PostgreSQL server instead (the migrations enable `pg_trgm` and `fuzzystrmatch`, which come with standard installs):
+
+```sh
+createdb fastfix
+copy apps\api\.env.example apps\api\.env      # then set DATABASE_URL in apps/api/.env
+npm run db:migrate -w @fastfix/api             # create the tables
+npm run db:seed -w @fastfix/api                # fill the empty database with the mock data
+npm run dev
+```
+
+API keys (AI, maps) go in `.env` only. The web and mobile apps call the api, never the AI provider directly.
 
 ## Test accounts
 

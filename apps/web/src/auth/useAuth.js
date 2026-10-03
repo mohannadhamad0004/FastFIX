@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 
-// Holds { user, service, version, store }. The provider is AuthProvider in AuthContext.jsx.
-// `store` is the raw mock data - only features/admin/AdminProvider.jsx may use it.
+// Holds { user, service, profileService, version, store }. The provider is AuthProvider in
+// AuthContext.jsx. `store` is the raw mock data - only the mock providers that act like the api
+// (AdminProvider, MarketplaceProvider, TrucksProvider) may use it.
 export const AuthContext = createContext(null)
 
 function useAuthContext() {
@@ -18,6 +19,12 @@ function useAuthContext() {
 export function useAuth() {
   const { user, service } = useAuthContext()
   return { user, service }
+}
+
+// profileService.js: the logged-in user's own account settings (/account) and public profile
+// (/profile). `user` from useAuth() updates right after each call.
+export function useProfileService() {
+  return useAuthContext().profileService
 }
 
 // Loads data through the auth service, like useMarketplaceQuery: useAuthQuery(loadMechanics) with

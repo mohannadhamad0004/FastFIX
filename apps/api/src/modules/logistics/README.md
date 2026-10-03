@@ -8,3 +8,7 @@ Tow/transport requests: create a request, match the nearest available tow compan
 | `logistics.controller.js` | Reads the request, calls the service, sends the response |
 | `logistics.service.js` | Business logic |
 | `logistics.model.js` | Database queries for this module |
+
+## Endpoints
+
+- `GET /api/tow-companies?q=` (public): the tow companies directory. Only approved, non-suspended companies, without contact details. Searches name, city, service area and tags with the shared engine in `src/search/`.

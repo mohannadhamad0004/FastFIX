@@ -11,7 +11,8 @@ Used by `src/pages/Marketplace.jsx` (`/marketplace`), `src/pages/ShopPage.jsx` (
 | `marketplaceService.js` | `getShops`, `getShopById`, `getParts`, `getPartsByShop` (public), `getShopInventory` (own shop), `addPart`, `updatePart`, `deletePart` - mock for now |
 | `MarketplaceProvider.jsx` | Holds the mock data in React state and provides the service (mounted in `app/AppProviders.jsx`) |
 | `MarketplaceContext.js` | The context plus `useMarketplaceService()` and `useMarketplaceQuery()` |
-| `searchParts.js` | Fuzzy search (fuse.js): multi-word, typos, part numbers in any format, ranking, "Did you mean" |
+| `api.js` | `searchParts(query)`: the part search on the server (`GET /api/marketplace/parts?q=`) |
+| `usePartSearch.js` | Hook that runs the server search as the query changes (debounced, cancels stale requests) |
 | `filters.js` | Filters, sorting, vehicle filter options, URL query string <-> filters, filter chips |
 | `useMarketplaceFilters.js` | Hook that keeps the search and filters in the URL (`?q=...`) |
 | `ownership.js` | `ownsShop`, `canManagePart` and the "You can only manage your own parts" message |
@@ -24,9 +25,8 @@ Used by `src/pages/Marketplace.jsx` (`/marketplace`), `src/pages/ShopPage.jsx` (
 | `components/PartOwnerActions.jsx` | Edit/Delete on a part card - rendered only for the shop that owns the part |
 | `constants.js` | Category, city, type, condition and sort option lists |
 | `format.js` | ₪ price formatting and the "Fits: ..." compatibility line |
-| `mockData.js` | Seed shops and parts for the mock service |
-| `api.js` | Calls to apps/api for this feature (not implemented yet) |
-| `types.js` | JSDoc types: `Shop`, `Part`, `Fitment` |
+| `mockData.js` | Seed shops and parts for the mock service (also seeds the api database: `npm run db:seed -w @fastfix/api`) |
+| `types.js` | JSDoc types: `Shop`, `Part`, `Fitment`, and the search response (`PartSearchResponse`) |
 
 The search input is the shared `src/components/SearchBar.jsx` (also used by the mechanic and tow company directories).
 
@@ -47,8 +47,14 @@ Each parts shop manages only its own parts. A part belongs to the parts shop acc
 
 ## Search
 
-- The query is split into words. Each word must match one of: part name, category, brand, compatible make or model, the start of a part number, or a fitment year ("2015").
-- Typos: each word is fuzzy-matched against every word in those fields. Words of up to 3 letters must match exactly, 4-5 letters may have 1 typo, and longer words 2.
-- Part numbers: spaces, dashes and dots are ignored, and so is case (`56110-1R000` = `561101r000` = `56110 1r000`). Both the OEM and the manufacturer number are checked.
-- Ranking: exact part number match ("Exact part number match" label) → parts matching every word → partial matches.
+The text search runs in `apps/api` (PostgreSQL, see `apps/api/src/search/README.md`); `Marketplace.jsx` gets ranked results through `usePartSearch` and applies the filters and sort order from `filters.js` to them. The api must be running (`npm run dev`); without a `DATABASE_URL` it uses an in-memory database with the mock data (root README).
+
+- The query is split into words. Each word must match one of: part name, category, brand, tags, compatible make or model, the start of a part number, or a fitment year ("2015").
+- Make, model and year words must match the same compatible vehicle: "steering wheel hyundai accent" finds steering wheels that fit a Hyundai Accent.
+- Typos: words of up to 3 letters must match exactly, 4-5 letters may have 1 typo, and longer words 2 ("hundai", "toyta", "mercedez").
+- Synonyms: "rotor" finds brake discs, "rim" finds alloy wheels. The list is the `search_synonyms` table.
+- Part numbers: spaces, dashes, dots and case are ignored (`56110-1R000` = `561101r000` = `56110 1r000`). Both the OEM and the manufacturer number are checked.
+- Ranking: exact part number match ("Exact part number match" label) → parts matching every word → partial matches (only shown when nothing matches every word).
 - If no result matches every word without a typo, the closest make/model is offered as "Did you mean: Hyundai?".
+- Hidden parts and parts of suspended, pending or rejected shops are never returned.
+- Because the search reads the api database, parts added, edited or hidden through the mock service (dashboard, admin pages) don't change search results until those writes move to the api too.

@@ -1,89 +1,455 @@
-.page {
+﻿.page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
+  gap: var(--space-8);
+  background-image:
+    radial-gradient(circle 320px at 6% 8%, var(--color-decor), transparent),
+    radial-gradient(circle 420px at 96% 38%, var(--color-decor), transparent),
+    radial-gradient(circle 260px at 12% 92%, var(--color-decor), transparent);
 }
+
+/* ---- Hero: text on the left, a product preview on the right ---- */
 
 .hero {
-  padding: var(--space-7) var(--space-5);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-6);
+  /* Full width of the phone screen; a rounded panel from tablet up */
+  margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-4)) 0;
+  padding: var(--space-6) var(--space-4);
+  background:
+    radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--color-hero-glow) 22%, transparent), transparent 55%),
+    linear-gradient(160deg, var(--color-hero-from), var(--color-hero-to));
+  color: var(--color-hero-text);
 }
 
-.heroTitle {
-  font-size: var(--font-size-hero);
-  line-height: 1.2;
+@media (min-width: 768px) {
+  .hero {
+    margin: 0;
+    padding: var(--space-7) var(--space-6);
+    border-radius: var(--radius-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-8);
+  }
 }
 
 .heroText {
-  max-width: 640px;
-  margin: var(--space-4) auto 0;
-  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.heroTitle {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.02em;
+}
+
+.heroAccent {
+  color: var(--color-hero-accent);
+}
+
+.heroSubtitle {
+  max-width: 56ch;
+  color: var(--color-hero-muted);
   font-size: var(--font-size-lg);
 }
 
 .heroActions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: var(--space-3);
-  margin-top: var(--space-5);
 }
+
+@media (max-width: 479px) {
+  .heroActions,
+  .heroActions > * {
+    width: 100%;
+  }
+}
+
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  color: var(--color-hero-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* The report preview: plain markup that mimics the real report */
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 420px;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-hero-card);
+  color: var(--color-text);
+}
+
+@media (min-width: 1024px) {
+  .preview {
+    justify-self: end;
+    width: 100%;
+  }
+}
+
+.previewCaption {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.previewVehicle {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.previewUrgency {
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.previewLabel {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.previewIssue {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.previewEvidence {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.previewMeter {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.previewMeter span {
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--color-info);
+}
+
+.previewMeter .previewOff {
+  opacity: 0.25;
+}
+
+.previewChip {
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-subtle);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* ---- Sections ---- */
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .sectionTitle {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-h2);
 }
 
-.steps,
-.roles {
+.sectionText {
+  color: var(--color-text-muted);
+}
+
+/* ---- How it works ---- */
+
+.steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
 }
 
-.card {
+.step {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-5);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
 }
 
-.stepNumber {
+/* The connecting line runs through the numbered markers */
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 48px;
+    right: calc(-1 * var(--space-6) + 8px);
+    border-top: 2px dashed var(--color-border-strong);
+  }
+}
+
+.stepMarker {
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-pill);
-  background: var(--color-info-bg);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  color: var(--color-accent-contrast);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.stepIcon {
+  font-size: 1.75rem;
+}
+
+.stepTitle {
+  font-size: var(--font-size-h3);
+}
+
+.stepText {
+  color: var(--color-text-muted);
+}
+/* ---- Marketplace / Mechanics / Tow Companies ---- */
+
+.destinations {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .destinations {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .destinations {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.destination {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.destinationIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent);
+  font-size: 1.75rem;
+}
+
+.destinationTitle {
+  font-size: var(--font-size-h3);
+}
+
+.destinationLink {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.destinationText {
+  flex-grow: 1;
+  color: var(--color-text-muted);
+}
+
+.destinationCta {
+  margin-top: var(--space-2);
   color: var(--color-primary);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
-.cardTitle {
-  font-size: var(--font-size-lg);
+/* ---- Featured ---- */
+
+.featuredGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
-.cardText {
+.featuredHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.featuredTitle {
+  font-size: var(--font-size-h4);
+}
+
+.seeAll {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Scrolls sideways on phones, a grid from tablet up */
+.strip {
+  display: grid;
+  grid-auto-columns: minmax(260px, 80%);
+  grid-auto-flow: column;
+  gap: var(--space-4);
+  padding-bottom: var(--space-2);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.strip > li {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 768px) {
+  .strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: row;
+    overflow: visible;
+  }
+
+  .partsStrip {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+.partTile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.partCategory {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.partName {
+  font-size: var(--font-size-md);
+}
+
+.partLink {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.partMeta {
+  flex-grow: 1;
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
-  flex-grow: 1;
 }
 
-.roleActions {
-  display: flex;
-  gap: var(--space-2);
+.partPrice {
   margin-top: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-extrabold);
+}
+
+/* ---- Trust and emergency ---- */
+
+.trustSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-subtle);
+}
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .trustGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .trustSection {
+    padding: var(--space-7) var(--space-7);
+  }
+}
+
+.trustTitle {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-h3);
+}
+
+.emergency {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-danger-bg);
+}
+
+.emergencyAction {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
 }

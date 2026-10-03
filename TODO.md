@@ -1,74 +1,113 @@
-# FastFix — Full Project To-Do
+# FastFix — Project To-Do
 
-Ordered by phase, not by date. Work top to bottom — each phase mostly depends on the one before it.
+✅ = done  ⬜ = not done yet
 
-## Phase 0 — Setup (mostly done)
-- [x] Decide stack: React (web), React Native (mobile), Node.js (backend), PostgreSQL
-- [x] Repo created (FastFIX, GitHub), working branch `mohand`, PR-into-main workflow
-- [x] Monorepo layout: `apps/{web,mobile,api}`, `packages/shared`
-- [x] `.gitignore` covering `node_modules/`, `.env`, `.claude/`, `.idea/`
-- [x] `CLAUDE.md` written with stack, roles, and folder conventions
-- [x] `apps/web/src` skeleton scaffolded (`app/`, `auth/`, `authorization/`, `features/`, `components/`, `styles/`, etc.)
-- [ ] Scaffold `apps/api/src` the same way: `modules/{auth,cars,diagnosis,marketplace,logistics,certification}`, plus `db/` and `config/`
-- [ ] Scaffold `apps/mobile/src` mirroring the same feature names as web
+Most "done" frontend items still use **mock data**. They become real in Phase 3 (backend).
 
-## Phase 1 — Naming fix (do before building anything new)
-- [ ] Rename "Driver" → **Tow** everywhere: role name (`driver` → `tow`), `DriverDashboard.jsx` → `TowDashboard.jsx`, route `/driver` → `/tow`
-- [ ] Update the data model: Tow is a **company** account, not one truck — add a `Truck` entity (id, tow_company_id, plate, capacity, status) owned by a Tow account, the same way `Part` belongs to a Shop Owner
-- [ ] Update `TransportRequest` to reference a specific `truck_id`, not directly a driver — matching now happens at the truck level, company level for assignment
-- [ ] Update the earlier UML/ER diagrams and the old project-plan document to reflect the FastFix name and the Tow-as-company decision (they still say "Driver" and, in one case, the old project name)
+## Phase 0 — Setup
+- ✅ Stack decided (on paper): React (web), React Native (mobile), Node.js (backend), PostgreSQL
+- ✅ React web app installed and running (Vite)
+- ✅ PostgreSQL installed on your computer
+- ⬜ React Native / Expo installed and a mobile app created
+- ✅ GitHub repo (FastFIX), working branch `mohand`, PR-into-main workflow
+- ✅ Monorepo layout: `apps/{web,mobile,api}`, `packages/shared`
+- ✅ `.gitignore` (`node_modules/`, `.env`, `.claude/`, `.idea/`)
+- ✅ `CLAUDE.md` with stack, roles, folder conventions
+- ✅ `apps/web/src` skeleton
+- ✅ `apps/api/src` folders and placeholder files only (modules: auth, cars, diagnosis, marketplace, logistics, certification) — no working backend yet
+- ✅ `apps/mobile/src` empty folders only — no React Native project yet
 
-## Phase 2 — Accounts, for every role (Customer, Mechanic, Shop Owner, Tow, Admin)
-- [ ] Shared Sign-in page — one login form, redirects to the right dashboard by role
-- [ ] Account page per role — view own account details (name/company name, email, role, approval status)
-- [ ] Profile page per role — edit contact info; Shop Owner and Tow also edit company details (business name, logo)
-- [ ] Tow's profile additionally manages its truck list (add/remove trucks, see each truck's status)
-- [ ] Keep using mock data for now; wire to real auth once the backend `auth` module exists (Phase 3)
+## Phase 1 — Naming and model fixes
+- ✅ Driver → **Tow Company** (a company with multiple trucks)
+- ✅ Shop Owner → **Parts Shop** (many independent shops on one platform)
+- ✅ Customer dashboard removed (customers use public pages + profile menu)
+- ✅ UML class diagram updated (Tow company owns Trucks, Parts Shop, Requests, Tags)
+- ✅ Update the old project-plan document (still says "Driver" and the old name)
 
-## Phase 3 — Backend core + database
-- [ ] Set up PostgreSQL connection and migrations folder in `apps/api`
-- [ ] Create tables from the schema we designed: `User`, `Car`, `VehicleVariant`, `ServiceRequest`, `AIAssessment`, `MechanicDiagnosis`, `Part`, `PartFitment`, `Certification`, `TransportRequest`, `Truck`
-- [ ] Build the `auth` module: signup/login, password hashing, JWT (or session) issuing, role field, `approvalStatus` field
-- [ ] Build the `cars` module: register a car, list a customer's cars, maintenance history endpoint
-- [ ] Wire the frontend Sign-in/Account/Profile pages from Phase 2 to these real endpoints
+## Phase 2 — Accounts (frontend, mock)
+- ✅ Shared login page, redirect by role
+- ✅ Multi-step signup per role (mechanic skills + certificates, workshop photos; shop license + photos; tow company license + trucks with papers)
+- ✅ Forgot / reset password pages
+- ✅ Pending-approval page
+- ✅ Dev test accounts + dev login panel
+- ✅ Account and Profile pages for every role (menu links exist, pages not built)
+- ✅ Tow company manages its trucks after signup (add / edit / remove)
+- ⬜ Customer profile menu: AI Agent (past diagnoses), Chats, Reports, My Cars
 
-## Phase 4 — AI diagnosis engine (Gemini)
-- [ ] Get a Gemini API key from Google AI Studio; store as `GEMINI_API_KEY`, backend-only, never in web/mobile code
-- [ ] Build the `diagnosis` backend module as its own isolated service: accepts photo/audio/video upload, calls Gemini with the mechanic system prompt, returns structured JSON (observations, candidate faults, urgency, recommended checks)
-- [ ] Store the result in `AIAssessment`, linked to a `ServiceRequest`
-- [ ] Frontend: replace the placeholder "report an issue" flow on the Customer dashboard with a real upload → AI report view
-- [ ] Log every case where the mechanic's confirmed diagnosis disagrees with the AI's — this becomes your accuracy evaluation for the thesis
+## Public pages (frontend, mock)
+- ✅ Marketplace with fuzzy search (typos, part numbers in any format, multi-word)
+- ✅ Public shop pages
+- ✅ Parts Shop adds and manages only its own parts
+- ✅ Mechanics directory + public mechanic profiles (certificates private, "Verified" badge)
+- ✅ Tow companies directory + public profiles (documents and plates private)
+- ✅ Browse without login; login required to send requests
+- ✅ Request forms: Request service, Request tow, Ask about this part
+- ✅cla Service modes: on-site / workshop visit / online consultation
+- ⬜ Ratings and reviews (not decided yet)
 
-## Phase 5 — Mechanic workflow + certification
-- [ ] Mechanic dashboard: list of `ServiceRequest`s with the AI pre-report, a "confirm/edit diagnosis" action → writes to `MechanicDiagnosis`
-- [ ] Certification upload flow (Mechanic, Shop Owner, Tow): document upload → `Certification` record, status `pending`
-- [ ] Admin dashboard: review pending certifications, approve/reject, sets `approvalStatus` on the `User`
-- [ ] Add a "verification method" field on `Certification` (document-only / phone call / in-person) so the manual check you wanted is tracked, not just assumed
+## Admin (frontend, mock)
+- ✅ Admin overview
+- ✅ Approvals with per-skill approval and required verification method
+- ✅ User management (suspend / reactivate)
+- ✅ Tags for parts, mechanics, and tow companies
+- ✅ Hide rule-breaking parts
+- ✅ Requests monitor
 
-## Phase 6 — Marketplace (parts)
-- [ ] Shop Owner: parts inventory CRUD (name, price, stock, category)
-- [ ] `VehicleVariant` + `PartFitment` join table to support parts shared across multiple car models (e.g. VW)
-- [ ] Customer + Mechanic: browse/search parts by compatibility, availability, price
-- [ ] Link parts used to a `ServiceRequest` (the `ServiceRequestPart` join table)
+## UI
+- ✅ Design system and shared components
+- ✅ Light / dark mode
+- ✅ Home page with AI diagnosis upload (photo, video, engine sound recording) — mock results
+- ✅ 3D car preview placeholder in the marketplace
 
-## Phase 7 — Tow / logistics
-- [ ] Tow company dashboard: manage trucks, see pending/active transport requests
-- [ ] Customer: request a tow from a `ServiceRequest`
-- [ ] Matching: find available trucks within range, rank by driving ETA (Mapbox or openrouteservice), not straight-line distance
-- [ ] Truck status updates (available / en route / busy)
+## Phase 3 — Real backend + database
+- ⬜ Install PostgreSQL (Windows installer from postgresql.org)
+- ⬜ Create the database + migrations
+- ⬜ Real authentication (password hashing, JWT, refresh tokens, reset-password email)
+- ⬜ Server-side authorization (roles, approval status, shop ownership)
+- ⬜ File uploads (public photos; private certificates and documents)
+- ⬜ Seed script with test accounts
+- ⬜ Connect frontend auth and admin pages to the real API
 
-## Phase 8 — 3D accessory preview
-- [ ] Curate a small set (3–10) of properly licensed GLB car models
-- [ ] Define attachment anchors per model (headlights, bumpers, wheels, etc.)
-- [ ] Build the preview with React Three Fiber on web; decide mobile approach (React Three Fiber Native or a simpler static/AR viewer)
-- [ ] Accessory records reference `compatible_vehicle_model_ids`, `glb_url`, `attachment_anchor`, position/rotation/scale
+## Phase 4 — Real AI diagnosis (Gemini)
+- ⬜ Gemini API key on the backend only
+- ⬜ Diagnosis endpoint: upload → Gemini → structured report saved to the database
+- ⬜ Mechanic sees the report next to the original photo / video / audio
+- ⬜ Mechanic confirms or corrects the diagnosis; log AI-vs-mechanic agreement for the thesis
+- ⬜ (Optional) Car-specific dashboard warning-light model
 
-## Phase 9 — Polish and academic deliverables
-- [ ] Regenerate the UML class diagram and ER diagram with the Tow/Truck changes from Phase 1, save them into a `/docs` folder in the repo
-- [ ] Keep the abstract (already submitted as a draft) in sync if the scope changes materially
-- [ ] Write up the AI-vs-mechanic agreement log as evaluation data once Phase 4–5 have real usage
+## Phase 5 — Role dashboards and communication
+- ⬜ Mechanic: receive, accept, decline requests
+- ⬜ Tow company: receive tow requests, assign a truck, update status
+- ⬜ Parts Shop: answer part questions
+- ⬜ Chats between customer and mechanic / tow company / shop
+- ⬜ Reports
+- ⬜ Notifications (request accepted, account approved)
 
-## Working habits (ongoing, not a phase)
-- [ ] Small commits, one phase-item at a time — not one giant commit per phase
-- [ ] Push to `mohand`, open a PR into `main`, merge after review — even solo
-- [ ] Use Claude Code one scoped task at a time, review before moving to the next
+## Phase 6 — Marketplace and search (backend)
+- ⬜ Parts, shops, mechanics, tow companies from the database
+- ⬜ Part compatibility tables (VehicleVariant + PartFitment) for shared parts
+- ⬜ Backend smart search with PostgreSQL pg_trgm + synonyms
+- ⬜ Buying parts: real orders/payment, or sale outside FastFix? (not decided yet)
+
+## Phase 7 — Tow logistics
+- ⬜ Find nearest available trucks, rank by driving time (Mapbox or openrouteservice)
+- ⬜ Truck status (available / en route / busy)
+
+## Phase 8 — 3D preview
+- ⬜ 3–10 licensed GLB car models with attachment points
+- ⬜ React Three Fiber viewer replacing the placeholder
+
+## Phase 9 — Mobile app
+- ⬜ Install Expo (React Native) and create the app inside `apps/mobile`
+- ⬜ Build the mobile screens using the same API as the web
+
+## Phase 10 — Academic deliverables
+- ✅ Abstract (GP1) drafted
+- ⬜ Keep the abstract in sync if the scope changes
+- ⬜ Diagrams saved in a `/docs` folder in the repo
+- ⬜ AI accuracy evaluation from the mechanic corrections
+
+## Open decisions
+- ⬜ Buying parts: orders and payment inside FastFix, or contact only?
+- ⬜ Ratings and reviews?
+- ⬜ Arabic language support (right-to-left layout)?

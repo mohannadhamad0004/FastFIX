@@ -1,4 +1,7 @@
+import ProviderRequests from '../features/requests/components/ProviderRequests.jsx'
+import ResponderEmergencies from '../features/requests/emergency/components/ResponderEmergencies.jsx'
 import Button from '../components/Button.jsx'
+import Card from '../components/Card.jsx'
 import StatusBadge from '../components/StatusBadge.jsx'
 import styles from './TowDashboard.module.css'
 
@@ -51,7 +54,7 @@ const active = transportRequests.filter((request) => request.status !== 'Pending
 
 function RequestCard({ request, action }) {
   return (
-    <li className={styles.card}>
+    <Card as="li" className={styles.card}>
       <div className={styles.cardHeader}>
         <div>
           <h3 className={styles.carName}>{request.car}</h3>
@@ -73,18 +76,26 @@ function RequestCard({ request, action }) {
         </div>
       </dl>
       {action}
-    </li>
+    </Card>
   )
 }
 
 export default function TowDashboard() {
   return (
     <div className={styles.page}>
-      <header>
-        <h1 className={styles.title}>Transport requests</h1>
-        <p className={styles.subtitle}>
-          Tow requests near your company and the jobs your trucks are working on.
-        </p>
+      <ResponderEmergencies />
+      <ProviderRequests />
+
+      <header className={styles.header}>
+        <div>
+          <h1 className={styles.title}>Transport requests</h1>
+          <p className={styles.subtitle}>
+            Tow requests near your company and the jobs your trucks are working on.
+          </p>
+        </div>
+        <Button to="/tow/trucks" variant="secondary">
+          Manage trucks
+        </Button>
       </header>
 
       <section className={styles.section}>

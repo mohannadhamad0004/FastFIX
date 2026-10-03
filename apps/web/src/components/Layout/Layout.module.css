@@ -1,5 +1,21 @@
-.main {
+﻿.main {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4) var(--space-7);
+  padding: var(--space-5) var(--space-4) var(--space-8);
+}
+
+.main[data-wide] {
+  max-width: var(--content-width-wide);
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: var(--space-6) var(--space-5) var(--space-9);
+  }
+}
+
+@media (min-width: 1280px) {
+  .main {
+    padding-inline: var(--space-6);
+  }
 }

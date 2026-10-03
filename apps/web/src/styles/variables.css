@@ -1,25 +1,241 @@
-/* Design tokens. Temporary values - not the final design. */
+﻿/* Design tokens: every color, size, space, radius and shadow in the app comes from here.
+   Component styles use var(--token) only - no raw colors or pixel sizes for these.
+
+   Themes: <html data-theme="light"> or <html data-theme="dark">. The inline script in index.html
+   sets it before the app loads (from the saved choice, or the operating system for "System"),
+   and context/ThemeProvider.jsx keeps it up to date. Every color below has a light and a dark
+   value; everything else is shared.
+
+   Contrast: every text/background pair passes WCAG AA (4.5:1) in both themes, and borders,
+   focus rings and input edges pass 3:1. Check new pairs before adding them. */
+
+/* ---- Light theme (also the default) --------------------------------------------------------- */
+/* Warm cream and white with espresso text; copper is the brand color. */
+
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  /* Primary: darker copper for text, links, icons, selected states and the focus ring (4.7:1 on
+     cream). */
+  --color-primary: #a65a2e;
+  --color-primary-hover: #8a4623;
+  --color-primary-contrast: #ffffff; /* text on --color-primary */
+  --color-primary-soft: #fbefe4; /* selected / active backgrounds */
+
+  /* Accent: the copper of primary buttons (a gradient, --gradient-accent). Its text is dark brown:
+     white on light copper fails WCAG AA. --color-accent is the solid middle of the gradient. */
+  --color-accent: #cf8a57;
+  --color-accent-hover: #e3ae80;
+  --color-accent-contrast: #1a1210;
+  --gradient-accent: linear-gradient(135deg, #e3ae80, #b96f40); /* 4.75:1 with --color-accent-contrast at the deep end */
+  --gradient-accent-hover: linear-gradient(135deg, #ebbd96, #c47c4d);
+  --shadow-glow: 0 6px 16px -4px rgba(185, 111, 64, 0.5); /* soft copper glow under primary buttons */
+  --color-icon: #a65a2e; /* icons inside inputs, small highlights */
+
+  /* Surfaces, from back to front */
+  --color-bg: #faf5ef; /* page background */
+  --color-surface: #ffffff; /* cards, panels, inputs */
+  --color-surface-raised: #ffffff; /* things floating on top: menus, modals, toasts, highlighted cards */
+  --color-surface-subtle: #f1e7dc; /* hover rows, placeholders, skeletons, wells inside cards */
+  --color-border: #e5d8ca;
+  --color-border-strong: #8c7767; /* input borders: 3:1 against surface and page background */
+  --color-text: #2a1d16;
+  --color-text-muted: #6f5b4e;
+
+  /* Status: green, amber, red and muted blue stay clearly apart from copper */
+  --color-success: #146c3a;
+  --color-success-bg: #ddf3e4;
+  --color-warning: #7a5200;
+  --color-warning-bg: #fbefc8;
+  --color-danger: #b42318;
+  --color-danger-bg: #fbe4e1;
+  --color-danger-contrast: #ffffff; /* text on --color-danger */
+  --color-info: #2f5fa8;
+  --color-info-bg: #e1ebf8;
+  --color-neutral: #6f5b4e;
+  --color-neutral-bg: #f1e7dc;
+
+  /* Hero bands: warm cream to sand with espresso text. Contrast is checked against the deeper
+     bottom color (#ebd9c3), the worst case. */
+  --color-hero-from: #fbf3e8;
+  --color-hero-to: #ebd9c3;
+  --color-hero-glow: #ffffff; /* soft highlight in the top corner */
+  --color-hero-text: #2a1d16; /* 11.9:1 */
+  --color-hero-muted: #5e4a3d; /* 6.0:1 */
+  --color-hero-accent: #8f4a22; /* deep copper: 4.8:1 */
+  --shadow-hero-card: 0 20px 40px -12px rgba(74, 44, 24, 0.22), 0 8px 16px -8px rgba(74, 44, 24, 0.12);
+
+  /* Soft circles behind the home and sign-in pages */
+  --color-decor: rgba(166, 90, 46, 0.07);
+
+  /* Tag badges: the palette admins choose from (utils/tagColors.js). White text on each passes AA. */
+  --color-tag-blue: #1f6feb;
+  --color-tag-green: #1a7f37;
+  --color-tag-teal: #0a7f7f;
+  --color-tag-purple: #8250df;
+  --color-tag-pink: #bf3989;
+  --color-tag-red: #cf222e;
+  --color-tag-orange: #bc4c00;
+  --color-tag-gold: #9a6700;
+  --color-tag-gray: #57606a;
+
+  --color-on-color: #ffffff; /* text on tag colors and on dark photo overlays */
+  --color-overlay: rgba(26, 18, 16, 0.55); /* behind modals and drawers */
+  --color-photo-bg: #f4eee8; /* light neutral behind product photos, so white-background photos look alike in both themes */
+  --color-banner-from: #4a2a1a; /* offer banners without a photo: copper-brown, white text 10:1 to 6.4:1 */
+  --color-banner-to: #8a4a26;
+  --color-scrim: rgba(26, 18, 16, 0.85); /* behind text on photos: white text stays above 4.5:1 */
+  --color-highlight: #fbefc8; /* matched search words */
+
+  /* Depth: soft warm shadows on a cream page */
+  --shadow-sm: 0 1px 2px rgba(74, 44, 24, 0.07), 0 1px 3px rgba(74, 44, 24, 0.09);
+  --shadow-md: 0 4px 8px -2px rgba(74, 44, 24, 0.1), 0 2px 4px -2px rgba(74, 44, 24, 0.07);
+  --shadow-lg: 0 16px 32px -8px rgba(74, 44, 24, 0.2), 0 6px 12px -4px rgba(74, 44, 24, 0.09);
+}
+
+/* ---- Dark theme ------------------------------------------------------------------------------ */
+/* Deep espresso brown, not black. Depth comes from lighter surfaces on top (bg < surface < subtle <
+   raised), with only faint shadows. Copper accents, warm cream text. */
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-primary: #d08a55; /* copper: 6.0:1 on surfaces */
+  --color-primary-hover: #e3ae80;
+  --color-primary-contrast: #1a1210;
+  --color-primary-soft: #33241c;
+
+  --color-accent: #d08a55;
+  --color-accent-hover: #e3ae80;
+  --color-accent-contrast: #1a1210;
+  --gradient-accent: linear-gradient(135deg, #e3ae80, #b96f40); /* dark brown text: 9.3:1 to 4.75:1 */
+  --gradient-accent-hover: linear-gradient(135deg, #ebbd96, #c47c4d);
+  --shadow-glow: 0 6px 20px -4px rgba(208, 138, 85, 0.45);
+  --color-icon: #d08a55;
+
+  --color-bg: #1a1210;
+  --color-surface: #241a16;
+  --color-surface-subtle: #2a1f1a;
+  --color-surface-raised: #30251e;
+  --color-border: #3d2f27;
+  --color-border-strong: #85705f; /* input borders: 3.6:1 on surface */
+  --color-text: #f5ebe0;
+  --color-text-muted: #b8a596;
+
+  --color-success: #6fcf8e;
+  --color-success-bg: #16301f;
+  --color-warning: #f2c94c;
+  --color-warning-bg: #3a2e0e;
+  --color-danger: #f28b82;
+  --color-danger-bg: #4a1e1b;
+  --color-danger-contrast: #1a1210;
+  --color-info: #8db4e8;
+  --color-info-bg: #1e2d45;
+  --color-neutral: #c4b3a5;
+  --color-neutral-bg: #3a2e27;
+
+  /* Hero bands: warm espresso with cream text */
+  --color-hero-from: #2a1d17;
+  --color-hero-to: #1a1210;
+  --color-hero-glow: #d08a55;
+  --color-hero-text: #f5ebe0;
+  --color-hero-muted: #c9b8a9;
+  --color-hero-accent: #e3ae80;
+  --shadow-hero-card: none; /* the card already lifts off the brown */
+
+  --color-decor: rgba(208, 138, 85, 0.05);
+
+  /* Slightly deeper, so badges don't glare on dark brown. White text still passes AA. */
+  --color-tag-blue: #1d5fc9;
+  --color-tag-green: #1a6f33;
+  --color-tag-teal: #0b6e6e;
+  --color-tag-purple: #7443c9;
+  --color-tag-pink: #a83379;
+  --color-tag-red: #b91f2a;
+  --color-tag-orange: #a84400;
+  --color-tag-gold: #875a00;
+  --color-tag-gray: #4f5761;
+
+  --color-on-color: #ffffff;
+  --color-overlay: rgba(10, 6, 5, 0.65);
+  --color-photo-bg: #f4eee8; /* light neutral behind product photos, so white-background photos look alike in both themes */
+  --color-banner-from: #4a2a1a; /* offer banners without a photo: copper-brown, white text 10:1 to 6.4:1 */
+  --color-banner-to: #8a4a26;
+  --color-scrim: rgba(10, 6, 5, 0.85);
+  --color-highlight: #4a3517;
+
+  /* Faint shadows: lighter surfaces do the work */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ---- Print: always the light colors, so dark-theme text doesn't print light on paper ---- */
+
+@media print {
+  :root[data-theme='dark'] {
+    color-scheme: light;
+    --color-primary: #a65a2e;
+    --color-primary-contrast: #ffffff;
+    --color-primary-soft: #fbefe4;
+    --color-bg: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-raised: #ffffff;
+    --color-surface-subtle: #f1e7dc;
+    --color-border: #e5d8ca;
+    --color-border-strong: #8c7767;
+    --color-text: #2a1d16;
+    --color-text-muted: #6f5b4e;
+    --color-success: #146c3a;
+    --color-success-bg: #ddf3e4;
+    --color-warning: #7a5200;
+    --color-warning-bg: #fbefc8;
+    --color-danger: #b42318;
+    --color-danger-bg: #fbe4e1;
+    --color-info: #2f5fa8;
+    --color-info-bg: #e1ebf8;
+    --color-neutral: #6f5b4e;
+    --color-neutral-bg: #f1e7dc;
+    --color-tag-orange: #bc4c00;
+  }
+}
+
+/* ---- Everything else (same in both themes) --------------------------------------------------- */
+
 :root {
-  --color-primary: #1f6feb;
-  --color-primary-hover: #1858c4;
-  --color-primary-contrast: #ffffff;
+  /* Focus ring for keyboard users (:focus-visible) */
+  --focus-ring: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-primary);
+  --shadow-card: var(--shadow-sm);
 
-  --color-bg: #f6f7f9;
-  --color-surface: #ffffff;
-  --color-border: #dfe3e8;
-  --color-text: #1c2024;
-  --color-text-muted: #5f6b76;
+  /* ---- Typography ---- */
 
-  --color-success: #1a7f37;
-  --color-success-bg: #dafbe1;
-  --color-warning: #9a6700;
-  --color-warning-bg: #fff4d4;
-  --color-danger: #cf222e;
-  --color-danger-bg: #ffebe9;
-  --color-info: #0969da;
-  --color-info-bg: #ddf4ff;
-  --color-neutral: #57606a;
-  --color-neutral-bg: #eaeef2;
+  /* Cairo covers Latin and Arabic, so an Arabic version needs no font change. */
+  --font-sans: 'Cairo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --font-size-xs: 0.75rem; /* 12px: badges, captions */
+  --font-size-sm: 0.875rem; /* 14px: small text, labels */
+  --font-size-md: 1rem; /* 16px: body */
+  --font-size-lg: 1.125rem; /* 18px: lead text, card titles */
+  --font-size-h4: 1.125rem;
+  --font-size-h3: 1.25rem;
+  --font-size-h2: clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);
+  --font-size-h1: clamp(1.75rem, 1.45rem + 1.25vw, 2.25rem);
+  --font-size-display: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); /* home page headline */
+  /* Older names, still used by page titles */
+  --font-size-xl: var(--font-size-h1);
+  --font-size-hero: var(--font-size-display);
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --line-height-tight: 1.2;
+  --line-height-body: 1.6;
+
+  /* ---- Spacing (4px steps) ---- */
 
   --space-1: 4px;
   --space-2: 8px;
@@ -28,18 +244,28 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
+  /* ---- Shape ---- */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-pill: 999px;
 
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 1.75rem;
-  --font-size-hero: 2.5rem;
+  --transition-fast: 180ms ease; /* 150-220ms: buttons, cards, tabs, inputs, nav */
 
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --content-width: 1100px;
+  /* ---- Layout ---- */
+
+  --content-width: 1280px; /* normal pages */
+  --content-width-wide: 1440px; /* directories, marketplace, admin (see components/Layout/wideRoutes.js) */
+  --navbar-height: 64px;
+
+  --z-sticky: 10;
+  --z-dropdown: 20;
+  --z-navbar: 30;
+  --z-toast: 50;
 }
+

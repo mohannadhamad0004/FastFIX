@@ -1,0 +1,131 @@
+﻿/* Same band as the home page hero (pages/Home.module.css): cream-to-sand in light, espresso in dark. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  margin: 0 calc(-1 * var(--space-4));
+  padding: var(--space-6) var(--space-4);
+  background:
+    radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--color-hero-glow) 22%, transparent), transparent 55%),
+    linear-gradient(160deg, var(--color-hero-from), var(--color-hero-to));
+  color: var(--color-hero-text);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    margin: 0;
+    padding: var(--space-7) var(--space-6);
+    border-radius: var(--radius-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-7);
+    padding: var(--space-8) var(--space-8);
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: var(--line-height-tight);
+}
+
+.accent {
+  color: var(--color-hero-accent);
+}
+
+.subtitle {
+  color: var(--color-hero-muted);
+  font-size: var(--font-size-lg);
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.searchRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.searchRow > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.searchInput {
+  min-height: 52px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-lg);
+}
+
+@media (max-width: 479px) {
+  .searchRow {
+    flex-direction: column;
+  }
+}
+
+/* My Garage: on the normal surface color, so it reads as the one control that matters */
+.garage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-hero-card);
+  color: var(--color-text);
+  border: 2px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.garage.selected {
+  border-color: var(--color-primary);
+}
+
+.garageTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-size: var(--font-size-h4);
+}
+
+.vehicleName {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+}
+
+.garageText {
+  color: var(--color-text-muted);
+}
+
+.selected .garageText {
+  color: var(--color-success);
+  font-weight: var(--font-weight-semibold);
+}
+
+.garageActions {
+  display: flex;
+  gap: var(--space-2);
+}

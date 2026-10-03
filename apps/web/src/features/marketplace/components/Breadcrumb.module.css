@@ -1,0 +1,21 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.item + .item::before {
+  content: '›';
+  margin-right: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.item [aria-current='page'] {
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}

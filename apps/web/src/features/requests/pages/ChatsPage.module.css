@@ -1,0 +1,82 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.title {
+  font-size: var(--font-size-h1);
+}
+
+.subtitle,
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.listPane {
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.chatPane {
+  display: none;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Phones and tablets: either the list or the open chat */
+.hasChat .listPane {
+  display: none;
+}
+
+.hasChat .chatPane {
+  display: block;
+  height: calc(100dvh - var(--navbar-height) - 160px);
+  min-height: 420px;
+}
+
+/* Wide screens: both side by side, the chat filling the height */
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 340px minmax(0, 1fr);
+    height: calc(100dvh - var(--navbar-height) - 180px);
+    min-height: 520px;
+  }
+
+  .listPane {
+    display: block;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .chatPane,
+  .hasChat .chatPane {
+    display: block;
+    height: auto;
+    min-height: 0;
+  }
+
+  .hasChat .listPane {
+    display: block;
+  }
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--space-6);
+  color: var(--color-text-muted);
+  text-align: center;
+}

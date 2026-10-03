@@ -1,0 +1,57 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 240px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.subline {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.comment {
+  display: block;
+  max-width: 48ch;
+  overflow-wrap: anywhere;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.report {
+  display: block;
+  max-width: 48ch;
+  margin-top: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border-left: 3px solid var(--color-warning);
+  background: var(--color-warning-bg);
+  font-size: var(--font-size-xs);
+}
+
+.actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.heading {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-lg);
+}
+
+.linkButton {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

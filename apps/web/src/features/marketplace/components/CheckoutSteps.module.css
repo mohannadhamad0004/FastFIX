@@ -1,0 +1,254 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.intro,
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.shopCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.shopHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.shopName {
+  font-size: var(--font-size-lg);
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: var(--space-3);
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.choice:hover:not(.choiceDisabled) {
+  background: var(--color-surface-subtle);
+}
+
+.choice input {
+  margin-top: 4px;
+  accent-color: var(--color-primary);
+}
+
+.choice:has(input:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.choiceChecked {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.choiceChecked:hover {
+  background: var(--color-primary-soft);
+}
+
+.choiceDisabled {
+  border-color: var(--color-border);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.choiceBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  font-size: var(--font-size-sm);
+}
+
+.choiceTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+}
+
+.problem {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-semibold);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+}
+
+.panelNote {
+  font-size: var(--font-size-sm);
+}
+
+.newAddress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+}
+
+.newAddress > :first-child,
+.newAddress > div {
+  align-self: stretch;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  font-size: var(--font-size-sm);
+}
+
+.facts dt {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.mapLink {
+  align-self: flex-start;
+  font-weight: var(--font-weight-bold);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.cardPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 2px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+}
+
+.placeholderTitle {
+  font-weight: var(--font-weight-bold);
+}
+
+.requestSummary {
+  font-size: var(--font-size-sm);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.items li,
+.totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.items li > :last-child,
+.totals dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.totalRow {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+}
+
+.grand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.grandRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--font-size-lg);
+}
+
+.grandAmount {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-extrabold);
+}

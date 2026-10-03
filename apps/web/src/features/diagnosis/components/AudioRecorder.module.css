@@ -1,0 +1,215 @@
+.recorder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ---- Idle: the big Record button ---- */
+
+.start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-subtle);
+  text-align: center;
+}
+
+.recordButton {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 112px;
+  height: 112px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-extrabold);
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--color-accent) 20%, transparent),
+    var(--shadow-md);
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.recordButton:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  transform: scale(1.03);
+}
+
+.recordButton:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--color-accent) 20%, transparent),
+    var(--focus-ring);
+}
+
+.recordButton:disabled {
+  cursor: progress;
+  opacity: 0.8;
+}
+
+.help {
+  max-width: 420px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ---- Recording ---- */
+
+.live {
+  align-items: center;
+  padding: var(--space-5) var(--space-4);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-lg);
+  background: var(--color-danger-bg);
+}
+
+.meter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  max-width: 420px;
+  height: 64px;
+}
+
+.bar {
+  flex: 1;
+  max-width: 8px;
+  height: calc(var(--level) * 100%);
+  min-height: 4px;
+  border-radius: 4px;
+  background: var(--color-danger);
+  transition: height 80ms linear;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.limit {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.progress {
+  width: 100%;
+  max-width: 420px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-danger);
+}
+
+.status {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.stopButton {
+  min-width: 160px;
+}
+
+.stopSquare {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* ---- Playback ---- */
+
+.playback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-subtle);
+}
+
+.playbackHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.playbackTitle {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.playbackDetail {
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audio {
+  width: 100%;
+}
+
+.playbackActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}

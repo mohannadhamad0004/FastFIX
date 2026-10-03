@@ -1,0 +1,17 @@
+.part {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  font-size: var(--font-size-sm);
+}
+
+.part span {
+  color: var(--color-text-muted);
+}
+
+.quantity {
+  max-width: 160px;
+}

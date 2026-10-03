@@ -1,0 +1,202 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.viewport {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.track {
+  --gap: var(--space-4);
+  display: flex;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  touch-action: pan-y;
+  transform: translateX(calc(var(--index) * -1 * ((100% - (var(--visible) - 1) * var(--gap)) / var(--visible) + var(--gap))));
+  transition: transform 450ms ease;
+}
+
+.still {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    transition: none;
+  }
+}
+
+.slide {
+  flex: 0 0 calc((100% - (var(--visible) - 1) * var(--gap)) / var(--visible));
+  min-width: 0;
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-height: 190px;
+  height: 100%;
+  padding: var(--space-5);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  color: var(--color-on-color);
+  text-decoration: none;
+  user-select: none;
+}
+
+.banner:hover .cta {
+  text-decoration: underline;
+}
+
+.banner:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--color-on-color), var(--focus-ring);
+}
+
+/* No photo: copper-brown gradient from the theme (white text passes AA) */
+.noPhoto {
+  background: linear-gradient(135deg, var(--color-banner-from), var(--color-banner-to));
+}
+
+/* Photo: it fills the banner (object-fit: cover); a dark gradient over the left side keeps the
+   badge, title, subtitle and link readable */
+.photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-banner-from);
+}
+
+.withPhoto {
+  background: var(--color-banner-from);
+}
+
+.withPhoto::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, var(--color-scrim) 0%, var(--color-scrim) 40%, transparent 100%);
+}
+
+.banner > :not(.photo) {
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-danger);
+  box-shadow: 0 0 0 2px var(--color-on-color);
+  color: var(--color-danger-contrast);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.title {
+  position: relative;
+  max-width: 70%;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+}
+
+.subtitle {
+  position: relative;
+  max-width: 70%;
+  font-size: var(--font-size-sm);
+}
+
+.cta {
+  position: relative;
+  margin-top: auto;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.arrow:focus-visible,
+.dot:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.dots {
+  display: flex;
+  gap: var(--space-1);
+}
+
+/* 24px hit area around an 8px dot */
+.dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: none;
+  cursor: pointer;
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-strong);
+}
+
+.dotActive::after {
+  inset: 8px 4px;
+  background: var(--color-primary);
+}
+
+@media (max-width: 767px) {
+  .banner {
+    min-height: 170px;
+    padding: var(--space-4);
+  }
+
+  .title,
+  .subtitle {
+    max-width: 85%;
+  }
+}

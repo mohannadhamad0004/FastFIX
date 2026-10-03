@@ -1,0 +1,31 @@
+﻿.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 800px; /* the form stays focused even though the site is wide */
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--font-size-h1);
+}
+
+.subtitle {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}
+
+.resultArea {
+  scroll-margin-top: calc(var(--navbar-height) + var(--space-4));
+}
+
+.resultArea:empty {
+  display: none;
+}

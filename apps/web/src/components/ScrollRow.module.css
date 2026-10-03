@@ -1,0 +1,114 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-h3);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.viewAll {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.arrows {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.arrow:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.arrow:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.track {
+  display: grid;
+  grid-auto-columns: minmax(180px, calc((100% - 4 * var(--space-4)) / 5));
+  grid-auto-flow: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--space-1) var(--space-1) var(--space-3);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* scroll with the arrows, trackpad or swipe */
+  list-style: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track > li {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 1023px) {
+  .track {
+    grid-auto-columns: minmax(170px, calc((100% - 2 * var(--space-4)) / 3));
+  }
+}
+
+/* Phones and touch screens: swipe instead of arrows. */
+@media (max-width: 767px), (hover: none) {
+  .arrows {
+    display: none;
+  }
+
+  .track {
+    grid-auto-columns: minmax(160px, 44%);
+    gap: var(--space-3);
+  }
+}

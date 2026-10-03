@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.passwordGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.forgot {
+  align-self: flex-end;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.submit {
+  width: 100%;
+}

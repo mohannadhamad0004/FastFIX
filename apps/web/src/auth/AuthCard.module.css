@@ -1,0 +1,131 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-2);
+  background-image:
+    radial-gradient(circle 320px at 6% 8%, var(--color-decor), transparent),
+    radial-gradient(circle 420px at 96% 38%, var(--color-decor), transparent),
+    radial-gradient(circle 260px at 12% 92%, var(--color-decor), transparent);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding-top: var(--space-6);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: 460px;
+}
+
+.wide {
+  max-width: 820px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-size: var(--font-size-h1);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+}
+
+.footer {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* ---- Split screen (desktop): value panel on the left, the form on the right ---- */
+
+.brand,
+.formSide {
+  min-width: 0;
+}
+
+.brand {
+  display: none;
+}
+
+.formSide {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 640px;
+    padding-top: 0;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background-color: var(--color-surface);
+    background-image: none;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    background:
+      radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--color-hero-glow) 22%, transparent), transparent 55%),
+      linear-gradient(160deg, var(--color-hero-from), var(--color-hero-to));
+    color: var(--color-hero-text);
+  }
+
+  .brandTitle {
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: -0.02em;
+    line-height: var(--line-height-tight);
+  }
+
+  .brandAccent {
+    color: var(--color-hero-accent);
+  }
+
+  .benefits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .benefitTitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .benefitText {
+    color: var(--color-hero-muted);
+  }
+
+  .formSide {
+    align-items: center;
+    padding: var(--space-6);
+  }
+
+  /* The form sits directly on the panel: no second card around it */
+  .split .card {
+    max-width: 440px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,86 @@
+
+/* ---- Split screen (desktop): value panel on the left, the form on the right ---- */
+
+.brand,
+.formSide {
+  min-width: 0;
+}
+
+.brand {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 640px;
+    padding-top: 0;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background-color: var(--color-surface);
+    background-image: none;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    background:
+      radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--color-hero-glow) 22%, transparent), transparent 55%),
+      linear-gradient(160deg, var(--color-hero-from), var(--color-hero-to));
+    color: var(--color-hero-text);
+  }
+
+  .brandTitle {
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: -0.02em;
+    line-height: var(--line-height-tight);
+  }
+
+  .brandAccent {
+    color: var(--color-hero-accent);
+  }
+
+  .benefits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .benefitTitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .benefitText {
+    color: var(--color-hero-muted);
+  }
+
+  .formSide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+  }
+
+  /* The form sits directly on the panel: no second card around it */
+  .split .card {
+    max-width: 440px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .formSide {
+    display: flex;
+    justify-content: center;
+  }
+}

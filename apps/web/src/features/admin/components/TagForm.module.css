@@ -1,0 +1,87 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.name {
+  max-width: 360px;
+}
+
+.colors {
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-width: 0;
+}
+
+.legend {
+  margin-bottom: var(--space-1);
+  padding: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.swatchLabel {
+  position: relative;
+  cursor: pointer;
+}
+
+.radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.swatch {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--color-surface);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.radio:checked + .swatch {
+  box-shadow: 0 0 0 2px var(--color-text);
+}
+
+.radio:focus-visible + .swatch {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.preview {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  color: var(--color-on-color);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.buttons {
+  display: flex;
+  gap: var(--space-2);
+}

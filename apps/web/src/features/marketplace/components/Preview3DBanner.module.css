@@ -1,0 +1,33 @@
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(ellipse at 90% 0%, color-mix(in srgb, var(--color-hero-glow) 22%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--color-hero-from), var(--color-hero-to));
+  color: var(--color-hero-text);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--color-hero-accent);
+}
+
+.text {
+  display: flex;
+  flex: 1 1 260px;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-size: var(--font-size-h3);
+}
+
+.subtitle {
+  color: var(--color-hero-muted);
+  font-size: var(--font-size-sm);
+}

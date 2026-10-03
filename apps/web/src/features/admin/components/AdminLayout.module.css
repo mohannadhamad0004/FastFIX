@@ -1,0 +1,214 @@
+﻿.layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+}
+
+.layout.collapsed {
+  grid-template-columns: 72px minmax(0, 1fr);
+}
+
+.sidebar {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.heading {
+  padding: 0 var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.link,
+.collapse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.link:hover,
+.collapse:hover {
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+}
+
+.link:focus-visible,
+.collapse:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.collapse {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Current section: tinted background, a copper bar on the edge and bold text */
+.active,
+.active:hover {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--color-primary);
+}
+
+.link svg {
+  flex-shrink: 0;
+}
+
+/* Pending count */
+.badge {
+  margin-left: auto;
+  min-width: 24px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 24px;
+  text-align: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.content {
+  min-width: 0;
+}
+
+/* Collapsed (desktop): icons only; the badge becomes a dot-sized corner count */
+.collapsed .text,
+.collapsed .heading {
+  display: none;
+}
+
+.collapsed .link,
+.collapsed .collapse {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.collapsed .badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 18px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 18px;
+}
+
+/* Tablet and phone: the sidebar becomes a scrollable row of sections above the page. */
+@media (max-width: 1023px) {
+  .layout,
+  .layout.collapsed {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .sidebar {
+    position: static;
+    flex-direction: row;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    overflow-x: auto;
+  }
+
+  .group,
+  .links {
+    flex-direction: row;
+    gap: var(--space-1);
+  }
+
+  .heading,
+  .collapse {
+    display: none;
+  }
+
+  .link {
+    width: auto;
+  }
+
+  .active::before {
+    top: auto;
+    right: 12px;
+    bottom: 2px;
+    left: 12px;
+    width: auto;
+    height: 3px;
+    border-radius: 3px;
+  }
+
+  .collapsed .text {
+    display: inline;
+  }
+
+  .collapsed .link {
+    padding-inline: var(--space-3);
+  }
+
+  .collapsed .badge {
+    position: static;
+    min-width: 24px;
+    font-size: var(--font-size-xs);
+    line-height: 24px;
+  }
+}

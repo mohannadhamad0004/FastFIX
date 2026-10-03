@@ -1,0 +1,180 @@
+/* Pending work: the one place on the page with an accent surface */
+.attention {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-soft);
+}
+
+.attentionTitle {
+  font-size: var(--font-size-h3);
+}
+
+.needs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+
+.need {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  height: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.need:hover {
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+  transform: translateY(-2px);
+}
+
+.need:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.needCount {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+}
+
+.pending .needCount {
+  color: var(--color-primary);
+}
+
+.needLabel {
+  font-weight: var(--font-weight-bold);
+}
+
+.needState {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.pending .needState {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.note {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+}
+
+/* Passive numbers: grouped on one surface each, quieter than the work above */
+.groups {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+@media (min-width: 1024px) {
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .groups > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.groupTitle {
+  font-size: var(--font-size-h4);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-5) var(--space-4);
+  margin: 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+.label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.value {
+  margin: 0;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.1;
+}
+
+.value a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.value a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.list > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.listItem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color var(--transition-fast);
+}
+
+.listItem:hover,
+.listItem:focus-visible {
+  background: var(--color-surface-subtle);
+  outline: none;
+}
+
+.listName {
+  font-weight: var(--font-weight-semibold);
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

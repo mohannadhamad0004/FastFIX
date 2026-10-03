@@ -1,0 +1,55 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 260px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.subline {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.details {
+  /* two lines at most; the drawer has the full text */
+  display: -webkit-box;
+  min-width: 200px;
+  max-width: 320px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: var(--font-size-sm);
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.emergencies {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.heading {
+  color: var(--color-danger);
+  font-size: var(--font-size-h3);
+}
+
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}

@@ -1,0 +1,39 @@
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+}
+
+.caption {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.fileName {
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.photoLink {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.photo,
+.video {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.audio {
+  width: 100%;
+}

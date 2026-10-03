@@ -1,0 +1,45 @@
+﻿.name {
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  text-align: left;
+  cursor: pointer;
+}
+
+.name:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.name:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.subline {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.drawerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

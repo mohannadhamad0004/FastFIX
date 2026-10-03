@@ -1,0 +1,75 @@
+/* Shared by Input.jsx, Textarea.jsx and Select.jsx. */
+
+.control {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular); /* not the bold of a wrapping <label> */
+  line-height: 1.4;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.control::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.control:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.control:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent), 0 0 14px color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.control:disabled {
+  background: var(--color-surface-subtle);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.control[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+.control[aria-invalid='true']:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--color-surface),
+    0 0 0 5px var(--color-danger);
+}
+
+.sm {
+  min-height: 36px;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.select {
+  appearance: none;
+  padding-right: var(--space-7);
+  /* Chevron drawn with two gradients, so it follows the text color in dark mode too */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 13px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}

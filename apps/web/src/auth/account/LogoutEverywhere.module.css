@@ -1,0 +1,35 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.text {
+  flex: 1 1 280px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+@media (max-width: 480px) {
+  .row > :global(button) {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+}

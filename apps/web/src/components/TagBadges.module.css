@@ -1,0 +1,15 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* Tag colors come from a fixed palette (features/admin/constants.js) that is dark enough for white text. */
+.tag {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  color: var(--color-on-color);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}

@@ -1,0 +1,23 @@
+.shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  height: 100%;
+  text-align: center;
+}
+
+.name {
+  font-size: var(--font-size-md);
+  line-height: 1.3;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.city {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

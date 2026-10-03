@@ -1,0 +1,81 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.cardTitle {
+  font-size: var(--font-size-md);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  padding: var(--space-3) 0;
+}
+
+.row + .row {
+  border-top: 1px solid var(--color-border);
+}
+
+.rowView {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.badge {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  color: var(--color-on-color);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.rowActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.confirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: var(--space-4);
+  }
+
+  .rowActions {
+    margin-left: 0;
+  }
+}

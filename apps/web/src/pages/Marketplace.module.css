@@ -1,0 +1,143 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-h1);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 272px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-5);
+}
+
+.sidebar {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-4));
+  max-height: calc(100vh - var(--navbar-height) - var(--space-6));
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.count {
+  font-weight: var(--font-weight-bold);
+}
+
+.toolbarActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Two classes: must beat the Button's own display rule whatever order the CSS loads in */
+.toolbarActions .filterToggle {
+  display: none;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.suggestion {
+  font-size: var(--font-size-md);
+}
+
+.suggestionButton {
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.suggestionButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-4);
+}
+
+.grid > li {
+  display: flex;
+}
+
+.grid > li > * {
+  flex-grow: 1;
+}
+
+/* Tablet and phone: filters collapse behind the "Filters" button */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toolbarActions .filterToggle {
+    display: inline-flex;
+  }
+
+  .sidebar {
+    position: static;
+    display: none;
+    order: -1;
+    max-height: none;
+  }
+
+  .sidebarOpen {
+    display: block;
+  }
+
+  .results {
+    order: 0;
+  }
+}
+
+.headerTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
